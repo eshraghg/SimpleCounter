@@ -1,23 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
+import addOne from "./actions";
 
 class App extends React.Component {
-  state = { num: 0 };
-
-  onButtonClick = () => {
-    const newNum = this.state.num + 1;
-    this.setState({ num: newNum });
-  };
-
   render() {
+    console.log(this.props);
     return (
       <div>
-        <div>The currnet number is: {this.state.num} </div>
+        <div>The currnet number is: {this.props.state.num} </div>
         <div>
-          <button onClick={this.onButtonClick}>Add one</button>
+          <button onClick={this.props.addOne}>Add one</button>
         </div>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { state: state };
+};
+
+export default connect(mapStateToProps, { addOne })(App);
